@@ -108,7 +108,7 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.Docume
         return mDocuments.size();
     }
 
-    public class DocumentViewHolder extends RecyclerView.ViewHolder {
+    public static class DocumentViewHolder extends RecyclerView.ViewHolder {
 
         public TextView docTitle, docInfo, docDate;
         public AppCompatButton downloadBtn;

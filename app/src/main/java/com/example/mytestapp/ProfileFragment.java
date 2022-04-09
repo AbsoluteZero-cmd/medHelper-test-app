@@ -50,7 +50,7 @@ public class ProfileFragment extends Fragment {
 
     User user;
 
-    TextView profileFullName, profileEmail, profilePhone, profileDate, signOutBtn;
+    TextView profileFullName, profileEmail, profilePhone, profileDate, signOutBtn, trustedContactsBtn;
     ImageView profileImage;
 
     FloatingActionButton editProfileBtn;
@@ -70,6 +70,7 @@ public class ProfileFragment extends Fragment {
         profileDate = mView.findViewById(R.id.profile_date);
         profileImage = mView.findViewById(R.id.profile_image);
         signOutBtn = mView.findViewById(R.id.sign_out_button);
+        trustedContactsBtn = mView.findViewById(R.id.trust_contacts_button);
         editProfileBtn = mView.findViewById(R.id.profile_edit_button);
 
         progressDialog = new ProgressDialog(getContext());
@@ -77,6 +78,13 @@ public class ProfileFragment extends Fragment {
         progressDialog.show();
 
         getData();
+
+        trustedContactsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), TrustedContacts.class));
+            }
+        });
 
         signOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override

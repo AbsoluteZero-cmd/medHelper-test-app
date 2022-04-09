@@ -8,8 +8,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
         android:allowBackup="true"
@@ -19,6 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyTestApp"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".TrustedContacts"
+            android:exported="false" />
         <activity
             android:name=".HospitalDetail"
             android:exported="false" />

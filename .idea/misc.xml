@@ -9,8 +9,11 @@
         <entry key="..\:/Documents/AndroidStudioProjects/myTestApp/app/src/main/res/layout/activity_login.xml" value="0.21" />
         <entry key="..\:/Documents/AndroidStudioProjects/myTestApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Documents/AndroidStudioProjects/myTestApp/app/src/main/res/layout/activity_sign_up.xml" value="0.22" />
+        <entry key="..\:/Documents/AndroidStudioProjects/myTestApp/app/src/main/res/layout/activity_trusted_contacts.xml" value="0.25" />
+        <entry key="..\:/Documents/AndroidStudioProjects/myTestApp/app/src/main/res/layout/add_contact_dialogue_layout.xml" value="0.18" />
+        <entry key="..\:/Documents/AndroidStudioProjects/myTestApp/app/src/main/res/layout/contact_item.xml" value="0.25" />
         <entry key="..\:/Documents/AndroidStudioProjects/myTestApp/app/src/main/res/layout/document_item.xml" value="0.33" />
-        <entry key="..\:/Documents/AndroidStudioProjects/myTestApp/app/src/main/res/layout/fragment_documents.xml" value="0.22" />
+        <entry key="..\:/Documents/AndroidStudioProjects/myTestApp/app/src/main/res/layout/fragment_documents.xml" value="0.2" />
         <entry key="..\:/Documents/AndroidStudioProjects/myTestApp/app/src/main/res/layout/fragment_home.xml" value="0.184375" />
         <entry key="..\:/Documents/AndroidStudioProjects/myTestApp/app/src/main/res/layout/fragment_profile.xml" value="0.22" />
         <entry key="..\:/Documents/AndroidStudioProjects/myTestApp/app/src/main/res/menu/bottom_navigation.xml" value="0.33" />

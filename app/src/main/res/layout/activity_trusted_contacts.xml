@@ -1,34 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".TrustedContacts"
     android:padding="8dp">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="550dp"
-        tools:listitem="@layout/document_item"/>
+        android:layout_height="match_parent"
+        tools:listitem="@layout/contact_item"/>
 
     <TextView
-        android:id="@+id/no_documents_text"
+        android:id="@+id/no_contacts_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="There's not any documents yet"
+        android:text="There's not any trusted contacts yet"
 
         android:visibility="invisible"
 
         android:layout_centerInParent="true"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/document_add_btn"
+        android:id="@+id/contact_add_btn"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="20dp"
         android:clickable="true"
         app:srcCompat="@drawable/ic_add" />
+
 </RelativeLayout>

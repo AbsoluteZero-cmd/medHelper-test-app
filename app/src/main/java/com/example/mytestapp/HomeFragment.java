@@ -278,6 +278,8 @@ public class HomeFragment extends Fragment {
                             Double.parseDouble(currentHospital.getLng()));
                     final LatLng userLocation = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
 
+//                    DirectionsApiRequest
+
                     Marker marker = googleMap.addMarker(
                             new MarkerOptions()
                                     .position(currentLatLng)
@@ -325,29 +327,6 @@ public class HomeFragment extends Fragment {
         }
     }
 
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        System.out.println("I am here");
-//        switch (requestCode){
-//            case PERMISSIONS_REQUEST_SEND_SMS: {
-//                if(grantResults.length > 0
-//                    && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-//                    sendSmsPermissionGranted = true;
-//                    Toast.makeText(getContext(), "Permission granted, try again", Toast.LENGTH_SHORT).show();
-//
-//                }
-//            }
-//            case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
-//                if(grantResults.length > 0
-//                        && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-//                    locationPermissionGranted = true;
-//                    Toast.makeText(getContext(), "Permission granted, try again", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        }
-//
-//    }
 
     @Override
     public void onStart() {

@@ -60,7 +60,6 @@ public class DocumentsFragment extends Fragment {
         documentAddBtn = view.findViewById(R.id.document_add_btn);
         recyclerView = view.findViewById(R.id.recycler_view);
         noDocumentsText = view.findViewById(R.id.no_documents_text);
-        noDocumentsText.setVisibility(View.INVISIBLE);
 
         getData();
 
