@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HospitalDetail"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_centerHorizontal="true"
+
+        android:background="#DCDCDC" />
+
+    <TextView
+        android:id="@+id/hospital_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image_view"
+
+        android:layout_marginTop="20dp"
+        android:text="Hospital name: "
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/hospital_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hospital_name"
+
+        android:layout_marginTop="20dp"
+        android:text="Hospital phone: "
+        android:textSize="16dp" />
+
+    <ImageButton
+        android:id="@+id/copy_phone_button"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+
+        android:layout_alignBottom="@+id/hospital_phone"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/hospital_phone"
+
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/ic_edit" />
+
+    <TextView
+        android:id="@+id/hospital_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hospital_phone"
+
+        android:layout_marginTop="20dp"
+        android:text="Hospital address: "
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/hospital_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hospital_address"
+
+        android:layout_marginTop="20dp"
+        android:text="Hospital info: "
+        android:textSize="16dp" />
+
+    <Button
+        android:id="@+id/hospital_phone_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/hospital_web_button"
+
+        android:text="Make a call"
+        android:textSize="16dp" />
+
+    <Button
+        android:id="@+id/hospital_web_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentBottom="true"
+
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Web" />
+
+</RelativeLayout>

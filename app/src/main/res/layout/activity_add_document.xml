@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".AddDocument">
+
+    <TextView
+        android:id="@+id/document_file_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginBottom="20dp"
+        android:text="Chosen file: " />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/choose_document_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/document_file_name"
+        android:layout_alignParentLeft="true"
+
+        android:padding="15dp"
+        android:text="Choose document" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/choose_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/document_file_name"
+        android:layout_alignParentRight="true"
+        android:padding="15dp"
+        android:text="Choose image" />
+
+    <EditText
+        android:id="@+id/document_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/choose_document_button"
+        android:layout_marginTop="20dp"
+        android:hint="Document title" />
+
+    <EditText
+        android:id="@+id/document_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/document_title"
+        android:layout_marginTop="20dp"
+        android:hint="Document short info" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/upload_file_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/document_info"
+        android:layout_marginTop="30dp"
+
+        android:text="Upload" />
+
+</RelativeLayout>

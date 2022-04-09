@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".EditProfile">
+
+    <EditText
+        android:id="@+id/edit_profile_fullName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="30dp"
+
+        android:hint="Full name"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/edit_profile_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_profile_fullName"
+        android:layout_marginBottom="20dp"
+        android:hint="Email"
+
+        android:inputType="textEmailAddress"/>
+
+
+    <EditText
+        android:id="@+id/edit_profile_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_profile_email"
+        android:layout_marginBottom="20dp"
+        android:hint="Phone"
+
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/edit_profile_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_profile_phone"
+        android:layout_marginBottom="20dp"
+        android:hint="Password"
+
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/edit_profile_confirm_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/edit_profile_password"
+        android:layout_marginTop="30dp"
+        android:padding="15dp"
+
+        android:text="Confirm"/>
+
+</RelativeLayout>
