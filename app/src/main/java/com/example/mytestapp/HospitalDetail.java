@@ -120,7 +120,7 @@ public class HospitalDetail extends AppCompatActivity {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 makePhoneCall();
             } else {
-                Toast.makeText(this, "Permission DENIED", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -131,7 +131,6 @@ public class HospitalDetail extends AppCompatActivity {
         Geocoder geocoder = new Geocoder(this);
         List<Address> addresses = geocoder.getFromLocation(Double.parseDouble(lat), Double.parseDouble(lng), 1);
         address = addresses.get(0).getAddressLine(0);
-        System.out.println("address: " + address);
         return address;
     }
 }

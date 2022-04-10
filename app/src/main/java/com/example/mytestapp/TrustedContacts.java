@@ -85,7 +85,6 @@ public class TrustedContacts extends AppCompatActivity {
         addContactBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "It's working!", Toast.LENGTH_SHORT).show();
                 addContactDialogue();
             }
         });
@@ -112,7 +111,6 @@ public class TrustedContacts extends AppCompatActivity {
                 String mName = addContactName.getText().toString().trim();
                 String mPhone = addContactPhone.getText().toString().trim();
 
-                Toast.makeText(TrustedContacts.this, "Button is clicked", Toast.LENGTH_SHORT).show();
                 if(mName.isEmpty()){
                     addContactName.setError("Name shouldn't be empty");
                     addContactName.requestFocus();

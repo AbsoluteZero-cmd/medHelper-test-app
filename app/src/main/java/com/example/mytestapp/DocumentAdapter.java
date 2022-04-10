@@ -57,7 +57,6 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.Docume
         holder.docDate.setText(documentCurrent.getDate());
 
         currentUri = Uri.parse(documentCurrent.getDocumentUri());
-        System.out.println("My current uri: " + currentUri.toString());
 
         holder.downloadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,8 +64,6 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.Docume
                 DownloadManager.Request request = new DownloadManager.Request(currentUri);
                 String mimeType = mContext.getContentResolver().getType(currentUri);
                 request.setMimeType(mimeType);
-
-                System.out.println("My mimetype : " + mimeType);
 
                 request.allowScanningByMediaScanner();
                 request.setAllowedOverMetered(true);
@@ -81,7 +78,6 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.Docume
             @Override
             public void onClick(View view) {
                 final StorageReference storageReference = FirebaseStorage.getInstance().getReference("Documents").child(currentUser.getUid()).child(documentCurrent.getFileName());
-                System.out.println(documentCurrent.getFileName());
 
                 storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

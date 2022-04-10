@@ -144,7 +144,7 @@ public class HomeFragment extends Fragment {
     private void sendSosMessages() {
         messageSMS = "SOS! I need you right now!";
         if(lastKnownLocation != null){
-            messageSMS = "This is SOS message! I have to see you here: \nhttps://maps.google.com/?q=" + String.valueOf(lastKnownLocation.getLatitude())
+            messageSMS = "This is SOS message! I need you right now here: \nhttps://maps.google.com/?q=" + String.valueOf(lastKnownLocation.getLatitude())
                     + "," + String.valueOf(lastKnownLocation.getLongitude());
         }
 
@@ -158,11 +158,8 @@ public class HomeFragment extends Fragment {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for(DataSnapshot childSnaphsot: snapshot.child(currentUser.getUid()).getChildren()){
                         Contact contact = childSnaphsot.getValue(Contact.class);
-//                        System.out.println("contact: " + contact.getName() + " " + contact.getPhone());
                         mPhones.add(contact.getPhone());
                     }
-                    System.out.println("my phones");
-                    System.out.println(mPhones);
                     for(String phone: mPhones){
                         SmsManager smsManager = SmsManager.getDefault();
                         smsManager.sendTextMessage(phone, null, messageSMS, null, null);
@@ -214,7 +211,6 @@ public class HomeFragment extends Fragment {
 
                         if(marker.getPosition().latitude == currentLocationMarker.getPosition().latitude
                             && marker.getPosition().longitude == currentLocationMarker.getPosition().longitude){
-                            System.out.println("Pos is same");
                         }
                         else{
                             chosenHospital = null;
@@ -231,17 +227,14 @@ public class HomeFragment extends Fragment {
         String hospitalLat = String.valueOf(marker.getPosition().latitude);
         String hospitalLng = String.valueOf(marker.getPosition().longitude);
         String hospitalID = (hospitalLat + " " + hospitalLng).replace('.', 'a').replace(' ', 'b');
-//        Toast.makeText(getContext(), hospitalID, Toast.LENGTH_SHORT).show();
 
         DatabaseReference hospitalReference = FirebaseDatabase.getInstance().getReference("Hospitals");
         hospitalReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 chosenHospital = snapshot.child(hospitalID).getValue(Hospital.class);
-                System.out.println("hosp: " + chosenHospital.getName());
 
                 Intent intent = new Intent(getContext(), HospitalDetail.class);
-//                intent.putExtra("currentHospitalName", chosenHospital.getName());
 
                 intent.putExtra("my_obj", chosenHospital);
 

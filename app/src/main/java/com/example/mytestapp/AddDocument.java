@@ -71,8 +71,6 @@ public class AddDocument extends AppCompatActivity {
         progressDialog = new ProgressDialog(getApplicationContext());
         progressDialog.setMessage("Changing data...");
 
-//        docFileName.setVisibility(View.INVISIBLE);
-
         chooseDocBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

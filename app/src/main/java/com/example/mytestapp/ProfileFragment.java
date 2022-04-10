@@ -105,7 +105,6 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 openImageChooser();
-                System.out.println(imageUri);
             }
         });
 
@@ -191,20 +190,16 @@ public class ProfileFragment extends Fragment {
                 profileDate.setText(profileDate.getText().toString() + user.getDate());
 
                 String currentUri = user.getImageUri();
-                System.out.println("My current uri is " + currentUri);
                 if(currentUri != null){
                     Picasso.get()
                             .load(currentUri)
-//                            .placeholder(R.mipmap.ic_launcher)
                             .fit()
                             .centerCrop()
                             .into(profileImage);
                 }
                 else{
                     Picasso.get()
-//                            .load("http://i.imgur.com/DvpvklR.png")
                             .load("https://www.parkamerica.net/wp-content/uploads/2020/12/placeholder-profile-female.jpg")
-//                            .placeholder(R.mipmap.ic_launcher)
                             .fit()
                             .centerCrop()
                             .into(profileImage);
