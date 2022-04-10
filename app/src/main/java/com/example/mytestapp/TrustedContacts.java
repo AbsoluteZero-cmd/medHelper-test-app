@@ -113,8 +113,8 @@ public class TrustedContacts extends AppCompatActivity {
 
                     clearData();
 
-                    Contact mContact = new Contact(mName, mPhone);
-                    databaseReference.child(currentUser.getUid()).child(UUID.randomUUID().toString()).setValue(mContact)
+                    Contact mContact = new Contact(mName, mPhone, UUID.randomUUID().toString());
+                    databaseReference.child(currentUser.getUid()).child(mContact.getId()).setValue(mContact)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
@@ -175,5 +175,10 @@ public class TrustedContacts extends AppCompatActivity {
     public void clearData() {
         mContacts.clear();
         adapter.notifyDataSetChanged();
+    }
+
+    public void refreshActivity(){
+        finish();
+        startActivity(getIntent());
     }
 }

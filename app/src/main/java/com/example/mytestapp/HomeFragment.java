@@ -185,15 +185,15 @@ public class HomeFragment extends Fragment {
             Toast.makeText(getContext(), "Permission required to send messages", Toast.LENGTH_SHORT).show();
         }
 
-//        if((ContextCompat.checkSelfPermission(getActivity(),
-//                Manifest.permission.CALL_PHONE)
-//                == PackageManager.PERMISSION_GRANTED)){
-//            String phoneNum = "tel:" + phoneSMS;
-//            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(phoneNum)));
-//        }
-//        else{
-//            Toast.makeText(getContext(), "Permission required to phone call", Toast.LENGTH_SHORT).show();
-//        }
+        if((ContextCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.CALL_PHONE)
+                == PackageManager.PERMISSION_GRANTED)){
+            String phoneNum = "tel:" + phoneSMS;
+            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(phoneNum)));
+        }
+        else{
+            Toast.makeText(getContext(), "Permission required to phone call", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void setUpMap() {

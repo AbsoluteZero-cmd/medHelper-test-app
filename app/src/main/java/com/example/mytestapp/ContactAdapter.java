@@ -1,23 +1,30 @@
 package com.example.mytestapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactViewHolder> {
-    public Uri currentUri;
     public FirebaseUser currentUser;
     private Context mContext;
     private List<Contact> mContacts;
@@ -42,6 +49,17 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
 
         holder.contactName.setText("Name: " + contactCurrent.getName());
         holder.contactPhone.setText("Phone number: " + contactCurrent.getPhone());
+
+        holder.deleteContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Contacts").child(currentUser.getUid()).child(contactCurrent.getId());
+                databaseReference.setValue(null);
+                Toast.makeText(mContext, "Contact successfully deleted", Toast.LENGTH_SHORT).show();
+
+//                ((TrustedContacts)mContext).refreshActivity();
+            }
+        });
     }
 
     @Override
