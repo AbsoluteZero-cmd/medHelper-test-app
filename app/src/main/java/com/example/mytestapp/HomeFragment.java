@@ -310,8 +310,7 @@ public class HomeFragment extends Fragment {
                             new MarkerOptions()
                                     .position(currentLatLng)
                                     .title(currentHospital.getName())
-                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
-                                    .snippet("Some snippet"));
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
                     marker.showInfoWindow();
 
 

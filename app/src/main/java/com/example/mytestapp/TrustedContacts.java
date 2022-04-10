@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -57,6 +58,15 @@ public class TrustedContacts extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trusted_contacts);
 
+        final SwipeRefreshLayout pullToRefresh = findViewById(R.id.pull_to_refresh);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshData();
+                pullToRefresh.setRefreshing(false);
+            }
+        });
+
         mAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("Contacts");
 
@@ -79,6 +89,11 @@ public class TrustedContacts extends AppCompatActivity {
                 addContactDialogue();
             }
         });
+    }
+
+    private void refreshData() {
+        finish();
+        startActivity(getIntent());
     }
 
     private void addContactDialogue() {
@@ -140,10 +155,10 @@ public class TrustedContacts extends AppCompatActivity {
     }
 
     private void getData() {
-        mContacts = new ArrayList<>();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                mContacts = new ArrayList<>();
                 for (DataSnapshot postSnapshot : snapshot.child(currentUser.getUid()).getChildren()) {
                     Contact contact = postSnapshot.getValue(Contact.class);
                     mContacts.add(contact);
@@ -175,10 +190,5 @@ public class TrustedContacts extends AppCompatActivity {
     public void clearData() {
         mContacts.clear();
         adapter.notifyDataSetChanged();
-    }
-
-    public void refreshActivity(){
-        finish();
-        startActivity(getIntent());
     }
 }

@@ -1,36 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/pull_to_refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TrustedContacts"
-    android:padding="8dp">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/contact_item"/>
+        tools:context=".TrustedContacts"
+        android:padding="8dp">
 
-    <TextView
-        android:id="@+id/no_contacts_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="There's not any trusted contacts yet"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/contact_item"/>
 
-        android:visibility="invisible"
+        <TextView
+            android:id="@+id/no_contacts_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="There's not any trusted contacts yet"
 
-        android:layout_centerInParent="true"/>
+            android:visibility="invisible"
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/contact_add_btn"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
-        android:clickable="true"
-        app:srcCompat="@drawable/ic_add" />
+            android:layout_centerInParent="true"/>
 
-</RelativeLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/contact_add_btn"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            android:clickable="true"
+            app:srcCompat="@drawable/ic_add" />
+
+    </RelativeLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

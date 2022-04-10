@@ -55,9 +55,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
             public void onClick(View view) {
                 final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Contacts").child(currentUser.getUid()).child(contactCurrent.getId());
                 databaseReference.setValue(null);
-                Toast.makeText(mContext, "Contact successfully deleted", Toast.LENGTH_SHORT).show();
-
-//                ((TrustedContacts)mContext).refreshActivity();
+                Toast.makeText(mContext, "Contact successfully deleted, refresh the page to see changes", Toast.LENGTH_SHORT).show();
             }
         });
     }
