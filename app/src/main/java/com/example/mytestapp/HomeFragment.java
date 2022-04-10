@@ -52,6 +52,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -141,33 +142,58 @@ public class HomeFragment extends Fragment {
     }
 
     private void sendSosMessages() {
-        phoneSMS = "1234567890";
         messageSMS = "SOS! I need you right now!";
         if(lastKnownLocation != null){
             messageSMS = "This is SOS message! I have to see you here: \nhttps://maps.google.com/?q=" + String.valueOf(lastKnownLocation.getLatitude())
                     + "," + String.valueOf(lastKnownLocation.getLongitude());
         }
 
+        ArrayList<String> mPhones = new ArrayList<>();
         if((ContextCompat.checkSelfPermission(getActivity(),
                 Manifest.permission.SEND_SMS)
                 == PackageManager.PERMISSION_GRANTED)){
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(phoneSMS, null, messageSMS, null, null);
-            Toast.makeText(getContext(), "All messages delivered successfully", Toast.LENGTH_SHORT).show();
+            final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Contacts");
+            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for(DataSnapshot childSnaphsot: snapshot.child(currentUser.getUid()).getChildren()){
+                        Contact contact = childSnaphsot.getValue(Contact.class);
+//                        System.out.println("contact: " + contact.getName() + " " + contact.getPhone());
+                        mPhones.add(contact.getPhone());
+                    }
+                    System.out.println("my phones");
+                    System.out.println(mPhones);
+                    for(String phone: mPhones){
+                        SmsManager smsManager = SmsManager.getDefault();
+                        smsManager.sendTextMessage(phone, null, messageSMS, null, null);
+                    }
+                    if(mPhones.size() > 0){
+                        Toast.makeText(getContext(), "All messages delivered successfully", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(getContext(), "No contacts to send SOS messages", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
         }
         else{
             Toast.makeText(getContext(), "Permission required to send messages", Toast.LENGTH_SHORT).show();
         }
 
-        if((ContextCompat.checkSelfPermission(getActivity(),
-                Manifest.permission.CALL_PHONE)
-                == PackageManager.PERMISSION_GRANTED)){
-            String phoneNum = "tel:" + phoneSMS;
-            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(phoneNum)));
-        }
-        else{
-            Toast.makeText(getContext(), "Permission required to phone call", Toast.LENGTH_SHORT).show();
-        }
+//        if((ContextCompat.checkSelfPermission(getActivity(),
+//                Manifest.permission.CALL_PHONE)
+//                == PackageManager.PERMISSION_GRANTED)){
+//            String phoneNum = "tel:" + phoneSMS;
+//            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(phoneNum)));
+//        }
+//        else{
+//            Toast.makeText(getContext(), "Permission required to phone call", Toast.LENGTH_SHORT).show();
+//        }
     }
 
     private void setUpMap() {
