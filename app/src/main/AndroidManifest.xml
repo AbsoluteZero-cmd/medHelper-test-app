@@ -19,6 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyTestApp"
         android:usesCleartextTraffic="true">
+
         <activity
             android:name=".TrustedContacts"
             android:exported="false" />
@@ -51,6 +52,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

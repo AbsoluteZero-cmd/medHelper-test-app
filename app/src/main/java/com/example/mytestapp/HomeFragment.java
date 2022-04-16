@@ -1,17 +1,13 @@
 package com.example.mytestapp;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Geocoder;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.SmsManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +16,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -28,7 +23,6 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.places.PlaceDetectionClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -39,8 +33,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -49,16 +41,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
-import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Locale;
-import java.util.UUID;
-
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class HomeFragment extends Fragment {
 
@@ -101,6 +86,8 @@ public class HomeFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         mAuth = FirebaseAuth.getInstance();
 
+        getCurrentFMSToken();
+
         sosButton = view.findViewById(R.id.sos_button);
 
         sosButton.setOnClickListener(new View.OnClickListener() {
@@ -114,6 +101,28 @@ public class HomeFragment extends Fragment {
 
         setUpMap();
         return view;
+    }
+
+    private void getCurrentFMSToken() {
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            System.out.println("Fetching FCM registration token failed");
+                            return;
+                        }
+                        String token = task.getResult().toString();
+
+                        // Get new FCM registration token
+                        if(token.isEmpty()){
+                            Toast.makeText(getContext(), "My token is empty", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            System.out.println("My token: " + token);
+                        }
+                    }
+                });
     }
 
     private void askAllPermissions() {
