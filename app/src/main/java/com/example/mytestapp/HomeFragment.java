@@ -8,6 +8,7 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,15 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -41,20 +51,23 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.Constants;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class HomeFragment extends Fragment {
 
     // Init basic vars
     View view;
-    AppCompatButton addBtn;
     Button sosButton;
 
     // Init map vars
-    private MapView mapView;
-    private GoogleMap googleMap;
     private SupportMapFragment supportMapFragment;
 
     // locations
@@ -63,20 +76,14 @@ public class HomeFragment extends Fragment {
     private static final int CAMERA_ZOOM = 15;
     private MarkerOptions currentLocationMarker;
 
-    // send sms
-    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
-    private static final int PERMISSIONS_REQUEST_SEND_SMS = 2;
     private static final int PERMISSIONS_REQUEST_ALL = 100;
-    private boolean locationPermissionGranted;
-    private boolean sendSmsPermissionGranted;
-    private boolean phoneCallPermissionGranted;
 
     FirebaseUser currentUser;
     FirebaseAuth mAuth;
 
     Hospital chosenHospital;
 
-    String messageSMS, phoneSMS;
+    String messageSMS, phoneCall;
 
     String[] permissions;
 
@@ -85,8 +92,6 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         mAuth = FirebaseAuth.getInstance();
-
-        getCurrentFMSToken();
 
         sosButton = view.findViewById(R.id.sos_button);
 
@@ -101,28 +106,6 @@ public class HomeFragment extends Fragment {
 
         setUpMap();
         return view;
-    }
-
-    private void getCurrentFMSToken() {
-        FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(new OnCompleteListener<String>() {
-                    @Override
-                    public void onComplete(@NonNull Task<String> task) {
-                        if (!task.isSuccessful()) {
-                            System.out.println("Fetching FCM registration token failed");
-                            return;
-                        }
-                        String token = task.getResult().toString();
-
-                        // Get new FCM registration token
-                        if(token.isEmpty()){
-                            Toast.makeText(getContext(), "My token is empty", Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                            System.out.println("My token: " + token);
-                        }
-                    }
-                });
     }
 
     private void askAllPermissions() {
@@ -191,10 +174,11 @@ public class HomeFragment extends Fragment {
             Toast.makeText(getContext(), "Permission required to send messages", Toast.LENGTH_SHORT).show();
         }
 
+        phoneCall = "112";
         if((ContextCompat.checkSelfPermission(getActivity(),
                 Manifest.permission.CALL_PHONE)
                 == PackageManager.PERMISSION_GRANTED)){
-            String phoneNum = "tel:" + phoneSMS;
+            String phoneNum = "tel:" + phoneCall;
             startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(phoneNum)));
         }
         else{
@@ -326,32 +310,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-    }
-
-    private void checkLocationPermission() {
-        if (ContextCompat.checkSelfPermission(this.getActivity(),
-                android.Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            locationPermissionGranted = true;
-        }
-        else {
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
-                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
-        }
-    }
-
-    private void checkSmsPermission() {
-        if (ContextCompat.checkSelfPermission(this.getActivity(),
-                Manifest.permission.SEND_SMS)
-                == PackageManager.PERMISSION_GRANTED) {
-            sendSmsPermissionGranted = true;
-        }
-        else {
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.SEND_SMS},
-                    PERMISSIONS_REQUEST_SEND_SMS);
-        }
     }
 
 

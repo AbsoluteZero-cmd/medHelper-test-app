@@ -23,6 +23,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -32,11 +34,15 @@ import java.util.Locale;
 public class HospitalDetail extends AppCompatActivity {
 
     private Hospital currentHospital;
+    private FirebaseUser currentUser;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hospital_detail);
+
+        mAuth = FirebaseAuth.getInstance();
 
         // Init views
         TextView hospitalName = findViewById(R.id.hospital_name);
@@ -132,5 +138,14 @@ public class HospitalDetail extends AppCompatActivity {
         List<Address> addresses = geocoder.getFromLocation(Double.parseDouble(lat), Double.parseDouble(lng), 1);
         address = addresses.get(0).getAddressLine(0);
         return address;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        currentUser = mAuth.getCurrentUser();
+        if (currentUser == null) {
+            startActivity(new Intent(this, Login.class));
+        }
     }
 }
