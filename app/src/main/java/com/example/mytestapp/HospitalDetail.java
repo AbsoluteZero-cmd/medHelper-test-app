@@ -69,6 +69,7 @@ public class HospitalDetail extends AppCompatActivity {
         try {
             String hospitalAddressText = getFormattedAddress(currentHospital.getLat(), currentHospital.getLng());
             hospitalAddress.setText(hospitalAddress.getText() + hospitalAddressText);
+//                    + "\nhttps://maps.google.com/?q=" + currentHospital.getLat() + "," + currentHospital.getLng());
         } catch (IOException e) {
             e.printStackTrace();
         }

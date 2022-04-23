@@ -24,14 +24,12 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_key" />
 
-        // Activities
         <activity
             android:name=".TrustedContacts"
             android:exported="false" />
         <activity
             android:name=".HospitalDetail"
             android:exported="false" />
-
         <activity
             android:name=".AddDocument"
             android:exported="false" />
@@ -49,10 +47,10 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

@@ -10,10 +10,10 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"/>
 
 <!--    <androidx.appcompat.widget.AppCompatButton-->
-<!--        android:id="@+id/add_hosp_btn"-->
+<!--        android:id="@+id/add_new_hosp"-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->
-<!--        android:text="new hospital"/>-->
+<!--        android:text="new hospital" />-->
 
     <Button
         android:id="@+id/sos_button"

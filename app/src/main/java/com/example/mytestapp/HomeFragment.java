@@ -67,6 +67,8 @@ public class HomeFragment extends Fragment {
     View view;
     Button sosButton;
 
+    AppCompatButton add_new_hosp;
+
     // Init map vars
     private SupportMapFragment supportMapFragment;
 
@@ -94,6 +96,31 @@ public class HomeFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
 
         sosButton = view.findViewById(R.id.sos_button);
+
+//        for(int i = 1; i <= 10; i++){
+//            Hospital hospital = new Hospital("" + String.valueOf(new Double(i)),
+//                    "" + String.valueOf(new Double(i)),
+//                    "Hospital #" + String.valueOf(new Double(i)),
+//                    "111111111",
+//                    "http://www.site.kz",
+//                    "Some detail text",
+//                    "https://lh5.googleusercontent.com/p/AF1QipMIM5w3i-1MvIPyku_rYELOWT-x3E5t3HnIib_u=w408-h240-k-no-pi-0-ya87.05999-ro-0-fo100");
+//
+//            String id = (hospital.getLat() + " " + hospital.getLng()).replace(' ', 'b').replace('.', 'a');
+//
+//            final DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Hospitals").child(id);
+//            reference.setValue(hospital).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                @Override
+//                public void onComplete(@NonNull Task<Void> task) {
+//                    if(task.isSuccessful()){
+//                        Toast.makeText(getContext(), "Hospitals added successfully", Toast.LENGTH_SHORT).show();
+//                    }
+//                    else{
+//                        Toast.makeText(getContext(), "Hospital add error", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            });
+//        }
 
         sosButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -226,6 +253,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 chosenHospital = snapshot.child(hospitalID).getValue(Hospital.class);
+                System.out.println("chosen hosp: " + snapshot.child(hospitalID));
 
                 Intent intent = new Intent(getContext(), HospitalDetail.class);
 

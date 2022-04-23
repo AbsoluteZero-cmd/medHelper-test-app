@@ -13,7 +13,7 @@
         android:layout_height="250dp"
         android:layout_centerHorizontal="true"
 
-        android:background="#DCDCDC" />
+        android:background="#DCDCDC"/>
 
     <TextView
         android:id="@+id/hospital_name"
@@ -21,9 +21,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/image_view"
 
-        android:layout_marginTop="20dp"
-        android:text="Hospital name: "
-        android:textSize="16dp" />
+        android:layout_marginTop="10dp"
+        android:text=""
+        android:textSize="24dp" />
 
     <TextView
         android:id="@+id/hospital_phone"
@@ -31,21 +31,21 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/hospital_name"
 
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="Hospital phone: "
         android:textSize="16dp" />
 
     <ImageButton
         android:id="@+id/copy_phone_button"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="21dp"
+        android:layout_height="21dp"
 
-        android:layout_alignBottom="@+id/hospital_phone"
-        android:layout_marginLeft="10dp"
+        android:layout_alignTop="@+id/hospital_phone"
+        android:layout_marginLeft="5dp"
         android:layout_toRightOf="@+id/hospital_phone"
 
         android:background="@android:color/transparent"
-        app:srcCompat="@drawable/ic_edit" />
+        app:srcCompat="@drawable/ic_copy" />
 
     <TextView
         android:id="@+id/hospital_address"
@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/hospital_phone"
 
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="Hospital address: "
         android:textSize="16dp" />
 
@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/hospital_address"
 
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="Hospital info: "
         android:textSize="16dp" />
 
